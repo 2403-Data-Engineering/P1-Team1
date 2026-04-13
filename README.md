@@ -2,3 +2,4 @@
 
 Members:
 Luke Po
+John Magri
