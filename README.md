@@ -3,3 +3,4 @@
 Members:
 Luke Po
 John Magri
+Silas Bucur
