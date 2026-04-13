@@ -1,6 +1,3 @@
 # P1-Team1
 
-Members:
-Luke Po
-John Magri
-Silas Bucur
+Members: Luke Po, John Magri, Silas Bucur, Guilherme Vilatoro Taglianeti
