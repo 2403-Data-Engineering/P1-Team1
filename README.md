@@ -7,6 +7,11 @@ Members: Luke Po, John Magri, Silas Bucur, Guilherme Vilatoro Taglianeti
   - Create a new instance of neo4j
   - Add the paysim_clean.csv file to the import folder of the newly created instance.
   - Run the database_creation.py script to initialize the DB.
+  - After the data is added to neo4j turn off the instance and intall the Graph Data Science plugin
+
+- Python setup:
+  - Run python -m venv .venv  
+  - Run pip install -r requirements.txt
 
 
 Node : Accounts - nameOrig / nameDest
