@@ -21,7 +21,7 @@ def main():
     source_csv = csv_files[0]
  
     df = pd.read_csv(source_csv)
-    df = df.drop(columns=["isFraud", "isFlaggedFraud"])
+    #df = df.drop(columns=["isFraud", "isFlaggedFraud"])
  
     output_path = Path.cwd() / "paysim_clean.csv"
     df.to_csv(output_path, index=False)
