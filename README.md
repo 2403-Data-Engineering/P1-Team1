@@ -1,6 +1,6 @@
 # P1-Team1
 
-Members: Luke Po, John Magri, Silas Bucur, Guilherme Vilatoro Taglianeti
+Members: Luke Po, John Magri, Guilherme Vilatoro Taglianeti
 
 - Neo4J setup:
   - Run the download_data.py script
