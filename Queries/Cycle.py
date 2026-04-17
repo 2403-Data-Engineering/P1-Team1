@@ -13,9 +13,11 @@ match path = (a:Account)-[:TRANSACTION *3..10]->(b:Account)
 RETURN path
 most likely b is fraud
 '''
-
-
-
+"""
+match path = ()-[*0..10]-(b:Account)
+where b.id = "C934752135"
+RETURN path
+"""
 
 load_dotenv()
 
@@ -24,7 +26,7 @@ with GraphDataScience(str(os.getenv("db_uri")), auth=(str(os.getenv("db_user")),
 
 
 
-    row = gds.run_cypher("match ()-[a]-() return count(a)")
+    row = gds.run_cypher("match (a:Account)-[*1..100]-(a) return count(a)")
     gds.run_cypher("")
     for r in row.to_numpy():
         print(r)

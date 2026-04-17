@@ -15,8 +15,8 @@ def find_large_transfers_with_cashout_after():
         gds.run_cypher("""
             MATCH (a:Account)-[t1:TRANSACTION {type: 'TRANSFER'}]->(b:Account)-[t2:TRANSACTION {type: 'CASH_OUT'}]->(c:Account)
             where ((t2.step - t1.step <= 2) or (t1.step - t2.step <= 2)) AND abs(t1.amount - t2.amount) / t1.amount < 0.1
-            SET a += {large_transfer: true, flagged_fraud: true},
-            b += {large_transfer: true, flagged_fraud: true},
-            c += {large_transfer: true, flagged_fraud: true}
+            SET a += {large_transfer: true},
+            b += {large_transfer: true},
+            c += {large_transfer: true}
             """)
         
