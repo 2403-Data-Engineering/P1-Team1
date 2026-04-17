@@ -4,7 +4,7 @@ from get_gds_connection import get_gds_connection
 
 
 
-def find_large_transfers_with_cashout_after():
+def drain_behavior():
     with get_gds_connection() as gds:
         gds.set_database("neo4j")
 
@@ -23,4 +23,5 @@ def find_large_transfers_with_cashout_after():
                 b += {drain_behavior : true},
                 c += {drain_behavior : true}
             """)
+        
 
