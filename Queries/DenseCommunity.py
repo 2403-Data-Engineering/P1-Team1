@@ -33,6 +33,9 @@ CALL gds.louvain.write('"""+ graph_name +"""', {
 })
 YIELD communityCount, modularity
 """
+index_community_ids= """
+CREATE INDEX FOR (a:Account) ON (a.community_id)
+"""
 
 set_community_internal_total = """
 MATCH(a:Account)
@@ -96,6 +99,7 @@ with GraphDataScience(endpoint=uri, auth=(username, password)) as gds:
     gds.set_database(database)
     gds.run_cypher(query=graph_query)
     community_count, modularity = gds.run_cypher(query=add_community_ids_query)
+    gds.run_cypher(query=index_community_ids)
     
     gds.run_cypher(query=set_community_internal_total)
     gds.run_cypher(query=set_community_leave_total)
