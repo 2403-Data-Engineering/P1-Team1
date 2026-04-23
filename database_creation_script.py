@@ -28,15 +28,14 @@ def main():
 
     
     with driver.session() as session:
-    
         session.run ("CREATE INDEX FOR (a:Account) ON (a.id);")
         print("loading dataset")
         session.run("\
             LOAD CSV WITH HEADERS FROM 'File:///paysim_clean.csv' AS row\
             CALL {\
             WITH row\
-            MERGE (a:Account {id: row.nameOrig, is_cycle: false, is_drain_behavior: false, is_fan_in: false, is_fan_out: false, is_large_transfer: false, is_dense_community:false})\
-            MERGE (b:Account {id: row.nameDest, is_cycle: false, is_drain_behavior: false, is_fan_in: false, is_fan_out: false, is_large_transfer: false, is_dense_community:false})\
+            MERGE (a:Account {id: row.nameOrig, is_cycle: false, is_drain_behavior: false, is_fan_in: false, is_fan_out: false, is_large_transfer: false, is_dense_community:false, is_guilty:false, is_similar:false})\
+            MERGE (b:Account {id: row.nameDest, is_cycle: false, is_drain_behavior: false, is_fan_in: false, is_fan_out: false, is_large_transfer: false, is_dense_community:false, is_guilty:false, is_similar:false})\
             CREATE (a)-[:TRANSACTION {\
                 type: row.type,\
                 amount: toFloat(row.amount),\
@@ -55,7 +54,6 @@ def main():
     driver.close()
     
 
-    
     time.sleep(2)
     print("Finding large transfers with cashout")
     find_large_transfers_with_cashout_after()
