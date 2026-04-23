@@ -20,7 +20,7 @@ load_dotenv()
 
 
 def main():
-
+    
     driver = GraphDatabase.driver(
         str(os.getenv("db_uri")),
         auth=(str(os.getenv("db_user")), str(os.getenv("db_password"))))
@@ -69,7 +69,7 @@ def main():
     print("Finding fan out")
     fan_out()
     time.sleep(2)
-    
+
     print("Dense Community")
     dense_community()
     

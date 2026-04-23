@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import neo4j
 from graphdatascience import GraphDataScience
 from Queries.get_gds_connection import get_gds_connection
+import time
 """
 Level: ring
 Pass: first
@@ -97,19 +98,29 @@ def dense_community():
 
   with get_gds_connection() as gds:
       gds.set_database(database)
+      
       print("\tSetting Graph")
+      time.sleep(2)
       gds.run_cypher(query=graph_query)
+      
       print("\tAdding community index")
+      time.sleep(2)
       gds.run_cypher(query=index_community_ids)
       
       print("\tAdding Communities")
+      time.sleep(2)
       community_count, modularity = gds.run_cypher(query=add_community_ids_query)
       
       print("\tSetting communities internal total")
+      time.sleep(2)
       gds.run_cypher(query=set_community_internal_total)
+      
       print("\tSetting communities leave total")
+      time.sleep(2)
       gds.run_cypher(query=set_community_leave_total)
+      
       print("\tFlagging accounts")
+      time.sleep(2)
       gds.run_cypher(query=flag_all_accounts_in_sus_communities)
       # rows = gds.run_cypher(query=communities_query)
       # community_id_list = []
