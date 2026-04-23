@@ -4,7 +4,7 @@ from Queries.get_gds_connection import get_gds_connection
 
 
 
-def drain_behavior():
+def guilt_by_association():
     with get_gds_connection() as gds:
         gds.set_database("neo4j")
 
