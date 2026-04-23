@@ -73,21 +73,24 @@ def dense_community():
 
   #TODO: need to flag all accounts which are in communities that have a high internal to external ratio and size between 3 and 15
   flag_all_accounts_in_sus_communities = """
-  MATCH (n)
-  call (n){
-    WITH n.community_id AS community_id, collect(n) AS accounts, n.community_total_amount AS community_internal_total, n.community_leave_total AS community_leave_total
-    WITH community_id, accounts, size(accounts) AS community_size, [node in accounts | id(node)] AS account_ids, community_internal_total, community_leave_total
-    WHERE community_size >= 3 AND community_size <= 15
-    WITH
-      community_id,
-      community_size,community_internal_total,community_leave_total,
-      CASE 
-        WHEN community_leave_total > 0 AND (community_internal_total / community_leave_total) >= """+ str(high_internal_to_external_ratio) +""" THEN TRUE
+ MATCH (n:Account)
+WITH n.community_id AS community_id,
+     size(collect(n)) AS community_size,
+     sum(n.community_total_amount) AS community_internal_total,
+     sum(n.community_leave_total) AS community_leave_total
+WHERE community_size >= 3 AND community_size <= 15
+WITH
+    community_id,
+    community_size,
+    CASE
+        WHEN community_leave_total > 0
+        AND (community_internal_total / community_leave_total) >= """+str(high_internal_to_external_ratio)+""" THEN TRUE
         ELSE FALSE
-      END AS is_dense
+    END AS is_dense
+CALL (community_id, is_dense){
     MATCH (acc:Account {community_id: community_id})
     SET acc.is_dense_community = is_dense
-    } IN TRANSACTIONS OF 1000 ROWS
+} IN TRANSACTIONS OF 1000 ROWS
   """
 
   # find the total transaction volume within the community

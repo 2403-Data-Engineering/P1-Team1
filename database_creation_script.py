@@ -35,8 +35,8 @@ def main():
             LOAD CSV WITH HEADERS FROM 'File:///paysim_clean.csv' AS row\
             CALL {\
             WITH row\
-            MERGE (a:Account {id: row.nameOrig, is_cycle: false, is_drain_behavior: false, is_fan_in: false, is_fan_out: false, is_large_transfer: false })\
-            MERGE (b:Account {id: row.nameDest, is_cycle: false, is_drain_behavior: false, is_fan_in: false, is_fan_out: false, is_large_transfer: false })\
+            MERGE (a:Account {id: row.nameOrig, is_cycle: false, is_drain_behavior: false, is_fan_in: false, is_fan_out: false, is_large_transfer: false, is_dense_community:false})\
+            MERGE (b:Account {id: row.nameDest, is_cycle: false, is_drain_behavior: false, is_fan_in: false, is_fan_out: false, is_large_transfer: false, is_dense_community:false})\
             CREATE (a)-[:TRANSACTION {\
                 type: row.type,\
                 amount: toFloat(row.amount),\
