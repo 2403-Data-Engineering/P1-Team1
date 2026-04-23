@@ -97,12 +97,19 @@ def dense_community():
 
   with get_gds_connection() as gds:
       gds.set_database(database)
+      print("\tSetting Graph")
       gds.run_cypher(query=graph_query)
-      community_count, modularity = gds.run_cypher(query=add_community_ids_query)
+      print("\tAdding community index")
       gds.run_cypher(query=index_community_ids)
       
+      print("\tAdding Communities")
+      community_count, modularity = gds.run_cypher(query=add_community_ids_query)
+      
+      print("\tSetting communities internal total")
       gds.run_cypher(query=set_community_internal_total)
+      print("\tSetting communities leave total")
       gds.run_cypher(query=set_community_leave_total)
+      print("\tFlagging accounts")
       gds.run_cypher(query=flag_all_accounts_in_sus_communities)
       # rows = gds.run_cypher(query=communities_query)
       # community_id_list = []
