@@ -5,7 +5,7 @@ copy to the working directory, and delete the cached download.
 from neo4j import GraphDatabase
 from pathlib import Path
 from dotenv import load_dotenv
-import pandas as pd
+
 import os
 from Queries.Large_transfers import find_large_transfers_with_cashout_after
 from Queries.Drain_Behavior import drain_behavior
@@ -26,7 +26,7 @@ def main():
         auth=(str(os.getenv("db_user")), str(os.getenv("db_password"))))
 
 
-    '''
+    
     with driver.session() as session:
     
         session.run ("CREATE INDEX FOR (a:Account) ON (a.id);")
@@ -69,7 +69,7 @@ def main():
     print("Finding fan out")
     fan_out()
     time.sleep(2)
-    '''
+    
     print("Dense Community")
     dense_community()
     

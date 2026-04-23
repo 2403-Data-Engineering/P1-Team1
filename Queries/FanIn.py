@@ -1,4 +1,4 @@
-import pandas as pd
+
 from Queries.get_gds_connection import get_gds_connection
 
 
