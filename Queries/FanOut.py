@@ -17,7 +17,7 @@ def fan_out():
                 total_out_amount: coalesce(total_out_amount, 0)
             }
             WITH a, fan_out_count, total_out_amount
-            WHERE fan_out_count >= 20 AND total_out_amount > 50000
+            WHERE fan_out_count >= 3 AND total_out_amount > 50000
             SET a.is_fan_out = true
             } IN TRANSACTIONS OF 1000 ROWS
             """)
