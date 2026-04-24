@@ -4,15 +4,15 @@ from Queries.get_gds_connection import get_gds_connection
 
 
 
-def guilt_by_association():
+def flag_all_fraud():
     with get_gds_connection() as gds:
         gds.set_database("neo4j")
 
         gds.run_cypher("""
-            match (a:Account {is_fraud:false})-[t:TRANSACTION]->(b:Account {is_fraud:true})
-            WHERE b.is_fraud
+            match (a:Account)
+            WHERE a.is_cycle or a.is_dense_community or a.is_drain_behavior or a.is_fan_in or a.is_fan_out or a.is_large_transfer
             CAll (a){
-            set a += {is_guilty:true, is_fraud: true}
+            set a += {is_fraud: true}
             }in TRANSACTIONS of 1000 rows
             """)
         
