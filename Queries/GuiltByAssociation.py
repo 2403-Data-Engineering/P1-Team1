@@ -10,7 +10,8 @@ def guilt_by_association():
 
         gds.run_cypher("""
             match (a:Account {is_fraud:false})-[t:TRANSACTION]->(b:Account {is_fraud:true})
-            WHERE b.is_fraud
+            with a,count(DISTINCT b) AS bad_neighbors 
+            WHERE bad_neighbors >= 2
             CAll (a){
             set a += {is_guilty:true, is_fraud: true}
             }in TRANSACTIONS of 1000 rows
