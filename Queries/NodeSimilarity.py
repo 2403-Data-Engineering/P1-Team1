@@ -44,7 +44,7 @@ RETURN gds.graph.project(
 
     flag_query='''
     match (a)-[t:SIMILAR]-(b)
-    WHERE t.score > 0.3
+    WHERE t.score > 0.7
     CALL(a){
     set a += {is_similar : true, is_fraud: true}
     } in TRANSACTIONS of 1000 rows
